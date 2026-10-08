@@ -1,0 +1,504 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!85!black,
+    urlcolor=blue!75!black,
+    citecolor=green!60!black
+}
+
+\tcolorboxenvironment{definition}{colback=blue!4!white,colframe=blue!75!black,arc=2mm}
+\tcolorboxenvironment{criterio}{colback=orange!5!white,colframe=orange!85!black,arc=2mm}
+\tcolorboxenvironment{protocolo}{colback=gray!5!white,colframe=black!75!white,arc=2mm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
+\newtheorem{criterio}{Criterio Normativo}[chapter]
+\newtheorem{protocolo}{Protocolo Canónico}[chapter]
+
+\title{\textbf{\LARGE Compendio de Bioestadística Médica y Formulario Canónico}\\
+\large Documento de Soporte y Base de Conocimiento para Ciencias de la Salud\\
+\small Referencia Técnica Formal de Conceptos, Supuestos, Contrastes y Fórmulas}
+\author{Cátedra de Bioestadística Médica}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Metodología de la Investigación y Tipología de Variables}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Fundamentos del Enfoque Estadístico en Medicina}
+La Bioestadística modela la variabilidad biológica e instrumental intrínseca a los sistemas vivos, permitiendo distinguir fluctuaciones atribuibles al azar de verdaderos efectos de intervenciones o exposiciones.
+
+\begin{definition}[Población, Muestra, Parámetro y Estadístico]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Población ($\Omega$):} Conjunto global de individuos o unidades de estudio sobre el que recae la hipótesis clínica.
+    \item \textbf{Muestra ($n$):} Subconjunto representativo de la población sobre el cual se realizan las mediciones empíricas.
+    \item \textbf{Parámetro ($\theta$):} Constante numérica que caracteriza a la población ($\mu, \sigma^2, \pi, \rho$). Es único, fijo y usualmente desconocido.
+    \item \textbf{Estadístico ($\hat{\theta}$):} Variable aleatoria calculada a partir de los datos muestrales ($\bar{X}, s^2, p, r$). Posee su propia distribución muestral, media y desviación estándar (\emph{error estándar}).
+\end{itemize}
+\end{definition}
+
+\section{Clasificación y Jerarquía de Variables}
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4} % Mayor separación entre filas
+\begin{tabularx}{\textwidth}{l p{2.8cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{4cm}}
+\toprule
+\textbf{Naturaleza} & \textbf{Escala} & \textbf{Propiedades y Operaciones} & \textbf{Ejemplos Clínicos} \\
+\midrule
+\multirow{2}{*}{\textbf{Cualitativa}} 
+& \textbf{Nominal} & Relación de igualdad o diferencia ($\neq$). Sin jerarquía. & Sexo, grupo sanguíneo, fenotipo HLA. \\
+\cmidrule{2-4}
+& \textbf{Ordinal} & Relación de orden y rango ($\neq, >$). Intervalos no constantes. & Estadio tumoral (I--IV), escala Glasgow, dolor (leve/mod/grave). \\
+\midrule
+\multirow{2}{*}{\textbf{Cuantitativa}} 
+& \textbf{Intervalo} & Cero relativo/convencional ($\neq, >, -$). Las razones o ratios no tienen sentido físico. & Temperatura ($^\circ\text{C}$), hora del día. \\
+\cmidrule{2-4}
+& \textbf{Razón} & Cero absoluto o natural ($\neq, >, -, / $). Indica ausencia de la magnitud. & Glucemia, peso, presión arterial, aclaramiento de creatinina. \\
+\bottomrule
+\end{tabularx}
+\caption{Taxonomía de variables y escalas de medida.}
+\label{tab:escalas_variables}
+\end{table}
+\caption{Taxonomía de variables y escalas de medida.}
+\end{table}
+
+\begin{criterio}[Regla Canónica de Categorización]
+Las mediciones deben registrarse originariamente en la escala con mayor riqueza de información (cuantitativa continua). Una variable continua puede transformarse en categórica posteriormente, pero el proceso inverso destruye irreversiblemente la varianza de los datos.
+\end{criterio}
+
+\section{Papel de las Variables en el Diseño del Estudio}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Variable Independiente / Predictora ($X$):} Factor de exposición, intervención o tratamiento cuya posible relación causal o de asociación se evalúa.
+    \item \textbf{Variable Dependiente / Resultado ($Y$):} Desenlace clínico, evento patológico o variable respuesta.
+    \item \textbf{Variable Confusora ($C$):} Variable asociada a la exposición de interés y a la vez factor de riesgo independiente del evento, sin constituir un paso intermedio en la cadena causal entre $X$ e $Y$.
+\end{itemize}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Estadística Descriptiva Univariante y Bivariante}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Estadísticos Univariantes de Centralización y Posición}
+Dada una muestra $x_1, x_2, \dots, x_n$:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Media Aritmética ($\bar{x}$):}
+    \begin{equation}
+    \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i
+    \end{equation}
+    Sujeta a extrema sensibilidad frente a asimetrías y observaciones aberrantes (\emph{outliers}).
+    \item \textbf{Mediana ($Md$ o $Q_2$):}
+    Valor central de la serie ordenada $x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}$.
+    \begin{equation}
+    Md = \begin{cases} 
+    x_{\left(\frac{n+1}{2}\right)} & \text{si } n \text{ es impar} \\[2mm]
+    \displaystyle \frac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2} + 1\right)}}{2} & \text{si } n \text{ es par}
+    \end{cases}
+    \end{equation}
+    Medida robusta de tendencia central; se prefiere sistemáticamente a la media si la distribución no es gaussiana.
+    \item \textbf{Rango Intercuartílico ($RI$ o $IQR$):}
+    \begin{equation}
+    RI = Q_3 - Q_1
+    \end{equation}
+    Abarca el $50\%$ central de las observaciones. Criterio de Tukey para detección de datos atípicos:
+    \[
+    \text{Outliers} \notin [Q_1 - 1{,}5 \cdot RI, \; Q_3 + 1{,}5 \cdot RI]
+    \]
+\end{enumerate}
+
+\section{Estadísticos de Dispersión y Forma}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Varianza Muestral Insesgada ($s^2$):}
+    \begin{equation}
+    s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2 = \frac{\sum_{i=1}^n x_i^2 - n\bar{x}^2}{n-1}
+    \end{equation}
+    El divisor $n-1$ (corrección de Bessel) garantiza $E(s^2) = \sigma^2$.
+    \item \textbf{Desviación Típica o Estándar ($s$):} $s = \sqrt{s^2}$. Conserva las unidades métricas de la variable original.
+    \item \textbf{Coeficiente de Variación ($CV$):}
+    \begin{equation}
+    CV = \frac{s}{|\bar{x}|} \times 100\%
+    \end{equation}
+    Medida adimensional de dispersión relativa; solo admisible para variables estrictamente positivas medidas en escala de razón.
+    \item \textbf{Coeficiente de Asimetría de Fisher ($CA$):}
+    \begin{equation}
+    CA = \frac{\frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^3}{s^3}
+    \end{equation}
+    $CA = 0$ (simetría); $CA > 0$ (asimetría a la derecha/positiva); $CA < 0$ (asimetría a la izquierda/negativa).
+    \item \textbf{Curtosis o Apuntamiento ($CAp$):}
+    \begin{equation}
+    CAp = \frac{\frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^4}{s^4} - 3
+    \end{equation}
+    $CAp = 0$ (mesocúrtica / normal); $CAp > 0$ (leptocúrtica); $CAp < 0$ (platicúrtica).
+\end{enumerate}
+
+\section{Descriptiva Bivariante: Asociación Numérica y Regresión}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Covarianza Muestral ($s_{XY}$):}
+    \begin{equation}
+    s_{XY} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1} = \frac{\sum_{i=1}^n x_i y_i - n\bar{x}\bar{y}}{n-1}
+    \end{equation}
+    \item \textbf{Coeficiente de Correlación Lineal de Pearson ($r$):}
+    \begin{equation}
+    r = \frac{s_{XY}}{s_X s_Y}, \quad -1 \le r \le +1
+    \end{equation}
+    \item \textbf{Recta de Regresión Mínimo-Cuadrática ($\hat{Y} = a + bx$):}
+    \begin{equation}
+    b = \frac{s_{XY}}{s_X^2} = r \frac{s_Y}{s_X}, \qquad a = \bar{y} - b\bar{x}
+    \end{equation}
+    \item \textbf{Coeficiente de Determinación ($R^2$):}
+    \begin{equation}
+    R^2 = r^2 = \frac{SS_{\text{Regresión}}}{SS_{\text{Total}}}
+    \end{equation}
+    Proporción de la varianza total de la variable dependiente explicada por el modelo lineal ajustado.
+\end{enumerate}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Teoría de Probabilidad y Pruebas Diagnósticas}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Axiomática y Teoremas Fundamentales}
+Sea $(\Omega, \mathcal{F}, P)$ un espacio de probabilidad:
+\begin{enumerate}[leftmargin=*]
+    \item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+    \item Probabilidad condicionada: $P(A \mid B) = \frac{P(A \cap B)}{P(B)}$, con $P(B) > 0$.
+    \item Independencia estocástica: $A \perp B \iff P(A \cap B) = P(A) \cdot P(B) \iff P(A \mid B) = P(A)$.
+    \item \textbf{Teorema de la Probabilidad Total:} Para una partición $\{B_1, \dots, B_k\}$ de $\Omega$:
+    \begin{equation}
+    P(A) = \sum_{j=1}^k P(A \mid B_j) P(B_j)
+    \end{equation}
+    \item \textbf{Teorema de Bayes:}
+    \begin{equation}
+    P(B_i \mid A) = \frac{P(A \mid B_i) P(B_i)}{\sum_{j=1}^k P(A \mid B_j) P(B_j)}
+    \end{equation}
+\end{enumerate}
+
+\section{Epidemiología Clínica: Evaluación de Pruebas Diagnósticas}
+Sea $D$ el estado de enfermedad ($D^+$ enfermo, $D^-$ sano) y $T$ el resultado de la prueba ($T^+$ positivo, $T^-$ negativo).
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cc|c}
+\toprule
+ & Enfermo ($D^+$) & Sano ($D^-$) & Total \\
+\midrule
+Test Positivo ($T^+$) & Verdaderos Positivos ($VP$) & Falsos Positivos ($FP$) & Total $T^+$ \\
+Test Negativo ($T^-$) & Falsos Negativos ($FN$) & Verdaderos Negativos ($VN$) & Total $T^-$ \\
+\midrule
+Total & Total $D^+$ & Total $D^-$ & $N$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Parámetros Intrínsecos (Constantes frente a variaciones de prevalencia)}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Sensibilidad ($S$):} Fracción de enfermos clasificados correctamente como positivos:
+    \begin{equation}
+    S = P(T^+ \mid D^+) = \frac{VP}{VP + FN}
+    \end{equation}
+    \item \textbf{Especificidad ($E$):} Fracción de sanos clasificados correctamente como negativos:
+    \begin{equation}
+    E = P(T^- \mid D^-) = \frac{VN}{VN + FP}
+    \end{equation}
+    \item Tasa de Falsos Positivos: $P(T^+ \mid D^-) = 1 - E$.
+    \item Tasa de Falsos Negativos: $P(T^- \mid D^+) = 1 - S$.
+\end{itemize}
+
+\subsection{Parámetros Extrínsecos o Predictivos (Dependientes de la prevalencia)}
+Sea $\pi = P(D^+)$ la prevalencia poblacional:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Valor Predictivo Positivo ($VPP$):}
+    \begin{equation}
+    VPP = P(D^+ \mid T^+) = \frac{S \cdot \pi}{S \cdot \pi + (1 - E) \cdot (1 - \pi)}
+    \end{equation}
+    \item \textbf{Valor Predictivo Negativo ($VPN$):}
+    \begin{equation}
+    VPN = P(D^- \mid T^-) = \frac{E \cdot (1 - \pi)}{(1 - S) \cdot \pi + E \cdot (1 - \pi)}
+    \end{equation}
+\end{itemize}
+
+\begin{criterio}[Dinámica de los Valores Predictivos]
+Al aumentar la prevalencia $\pi$ de la enfermedad en la población examinada:
+\begin{itemize}
+    \item El $VPP$ se incrementa de forma monótona.
+    \item El $VPN$ disminuye.
+    \item $S$ y $E$ se mantienen inalterados por ser propiedades operativas del test.
+\end{itemize}
+\end{criterio}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Variables Aleatorias y Modelos Teóricos}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Modelos Discretos Notables}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Distribución Binomial ($X \sim B(n, \pi)$):}
+    \begin{equation}
+    P(X = k) = \binom{n}{k} \pi^k (1 - \pi)^{n-k}, \quad k \in \{0, 1, \dots, n\}
+    \end{equation}
+    Esperanza: $E(X) = n\pi$; Varianza: $\text{Var}(X) = n\pi(1-\pi)$.
+    \item \textbf{Distribución de Poisson ($X \sim \mathcal{P}(\lambda)$):}
+    \begin{equation}
+    P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k \in \{0, 1, 2, \dots\}
+    \end{equation}
+    Esperanza: $E(X) = \lambda$; Varianza: $\text{Var}(X) = \lambda$.
+    \item \textbf{Aproximación de Binomial a Poisson:} Aplicable si $n \ge 20$ y $\pi \le 0{,}05$ (o $n \ge 100$ y $n\pi \le 10$), fijando $\lambda = n\pi$.
+\end{enumerate}
+
+\section{La Distribución Normal ($X \sim N(\mu, \sigma^2)$)}
+\begin{equation}
+f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2 \right)
+\end{equation}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Estandarización / Tipificación:} Si $X \sim N(\mu, \sigma^2)$, entonces $Z = \frac{X - \mu}{\sigma} \sim N(0, 1)$.
+    \item \textbf{Intervalos de cobertura empírica:}
+    \begin{align}
+    P(\mu - \sigma < X < \mu + \sigma) &\approx 0{,}6826 \\
+    P(\mu - 2\sigma < X < \mu + 2\sigma) &\approx 0{,}9544 \\
+    P(\mu - 3\sigma < X < \mu + 3\sigma) &\approx 0{,}9973
+    \end{align}
+    \item \textbf{Cuantiles críticos de $Z \sim N(0,1)$ habituales:}
+    $Z_{0{,}90} = 1{,}282$; $Z_{0{,}95} = 1{,}645$; $Z_{0{,}975} = 1{,}960$; $Z_{0{,}995} = 2{,}576$.
+\end{itemize}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Inferencia Estadística: Estimación e Intervalos de Confianza}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Distribuciones Muestrales Fundamentales}
+
+\subsection{Distribución Muestral de la Media ($\bar{X}$)}
+\begin{itemize}[leftmargin=*]
+    \item Parámetros exactos: $E(\bar{X}) = \mu$, $\text{Var}(\bar{X}) = \frac{\sigma^2}{n}$, $\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}}$.
+    \item \textbf{Teorema del Límite Central (TLC):} Si $n \ge 30$, con independencia de la forma distribucional de la población de origen:
+    \begin{equation}
+    \bar{X} \xrightarrow{d} N\left(\mu, \; \frac{\sigma}{\sqrt{n}}\right)
+    \end{equation}
+    \item Con $\sigma$ desconocida y estimada mediante la cuasidesviación estándar $s$:
+    \begin{equation}
+    T = \frac{\bar{X} - \mu}{s / \sqrt{n}} \sim t_{n-1}
+    \end{equation}
+\end{itemize}
+
+\subsection{Distribución Muestral de la Proporción ($p$)}
+Para $p = X/n$ con $X \sim B(n, \pi)$:
+\begin{itemize}[leftmargin=*]
+    \item Parámetros exactos: $E(p) = \pi$, $\sigma_p = \sqrt{\frac{\pi(1-\pi)}{n}}$.
+    \item \textbf{Aproximación asintótica normal:} Si $n \ge 30$, $np \ge 5$ y $n(1-p) \ge 5$:
+    \begin{equation}
+    Z = \frac{p - \pi}{\sqrt{\frac{p(1-p)}{n}}} \sim N(0, 1)
+    \end{equation}
+\end{itemize}
+
+\section{Formulario Canónico de Intervalos de Confianza al $(1-\alpha)$}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{l c c X}
+\toprule
+\textbf{Parámetro} & \textbf{Expresión Analítica del IC} & \textbf{Distribución} & \textbf{Supuestos Requeridos} \\
+\midrule
+Media ($\mu$), $\sigma$ conocida & $\displaystyle \bar{x} \pm Z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}}$ & $N(0,1)$ & Población normal o $n \ge 30$. \\
+\midrule
+Media ($\mu$), $\sigma$ desconocida & $\displaystyle \bar{x} \pm t_{n-1, \, 1-\alpha/2} \frac{s}{\sqrt{n}}$ & $t_{n-1}$ & Población normal o $n \ge 30$. \\
+\midrule
+Proporción ($\pi$) & $\displaystyle p \pm Z_{1-\alpha/2} \sqrt{\frac{p(1-p)}{n}}$ & $N(0,1)$ & $n \ge 30$, $np \ge 5$, $n(1-p) \ge 5$. \\
+\midrule
+Diferencia medias ($\mu_1 - \mu_2$), var. iguales & $\displaystyle (\bar{x}_1 - \bar{x}_2) \pm t_{n_1+n_2-2, \, 1-\alpha/2} \, s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}$ & $t_{n_1+n_2-2}$ & Normalidad en ambos grupos; $\sigma_1^2 = \sigma_2^2$. \\
+\midrule
+Diferencia medias pareadas ($\mu_D$) & $\displaystyle \bar{D} \pm t_{n-1, \, 1-\alpha/2} \frac{s_D}{\sqrt{n}}$ & $t_{n-1}$ & Diferencias $D_i$ normales o $n \ge 30$. \\
+\bottomrule
+\end{tabularx}
+\caption{Formulario general de intervalos de confianza.}
+\end{table}
+
+donde la varianza combinada (\emph{pooled variance}) es:
+\begin{equation}
+s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}
+\end{equation}
+
+\section{Fórmulas de Tamaño Muestral Mínimo Requerido}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Estimación de una Media con error máximo $e$:}
+    \begin{equation}
+    n \ge \left( \frac{Z_{1-\alpha/2} \cdot s}{e} \right)^2
+    \end{equation}
+    \item \textbf{Estimación de una Proporción con error máximo $e$:}
+    \begin{equation}
+    n \ge \frac{Z_{1-\alpha/2}^2 \cdot p(1-p)}{e^2}
+    \end{equation}
+    Si no se dispone de valor preliminar para $p$, se aplica el criterio de máxima indeterminación ($p = 0{,}5$):
+    \begin{equation}
+    n \ge \frac{Z_{1-\alpha/2}^2 \cdot 0{,}25}{e^2}
+    \end{equation}
+\end{enumerate}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Contrastes de Hipótesis: Pruebas Univariantes y Bivariantes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reglas de Decisión y Tipos de Error}
+\begin{itemize}[leftmargin=*]
+    \item $H_0$: Hipótesis de nulidad o no diferencia.
+    \item $H_1$: Hipótesis de investigación (bilateral o unilateral).
+    \item $\alpha$ (Nivel de significación): $P(\text{Rechazar } H_0 \mid H_0 \text{ es cierta}) = 0{,}05$.
+    \item $\beta$ (Riesgo de error tipo II): $P(\text{No rechazar } H_0 \mid H_0 \text{ es falsa}) = 0{,}20$.
+    \item Potencia ($1-\beta$): $P(\text{Rechazar } H_0 \mid H_0 \text{ es falsa}) \ge 0{,}80$.
+\end{itemize}
+
+\begin{criterio}[Regla Canónica de Decisión por $p$-valor]
+\begin{itemize}
+    \item Si $p\text{-valor} \le \alpha$ ($0{,}05$): \textbf{Se rechaza $H_0$}. La diferencia o asociación es estadísticamente significativa.
+    \item Si $p\text{-valor} > \alpha$ ($0{,}05$): \textbf{No se rechaza $H_0$}. No hay evidencia muestral suficiente para refutar la hipótesis nula. \emph{Nunca se declara que $H_0$ ha sido demostrada o aceptada.}
+\end{itemize}
+\end{criterio}
+
+\section{Pruebas de Bondad de Ajuste y Supuestos Previos}
+
+\subsection{Contrastes de Normalidad}
+\begin{itemize}[leftmargin=*]
+    \item $H_0$: La variable sigue una distribución normal vs. $H_1$: No sigue una distribución normal.
+    \item Regla: Se asume normalidad si $p > 0{,}05$.
+    \item \textbf{Test de Shapiro-Wilk:} Criterio mandatario para muestras pequeñas o moderadas ($n < 50$).
+    \item \textbf{Test de Kolmogorov-Smirnov (con corrección de Lilliefors):} Aplicable si $n \ge 50$.
+    \item \textbf{Muestras grandes ($n > 50$):} Por el Teorema del Límite Central, las pruebas paramétricas para comparar medias ($t$ de Student y ANOVA) son robustas frente a desviaciones de la normalidad.
+\end{itemize}
+
+\subsection{Contraste de Homogeneidad de Varianzas}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Test de Levene:} $H_0: \sigma_1^2 = \sigma_2^2 = \dots = \sigma_k^2$ frente a $H_1$: Varianzas no homogéneas.
+    \item Regla: Se asume homocedasticidad si $p > 0{,}05$.
+\end{itemize}
+
+\section{Guía de Selección de Pruebas Estadísticas Bivariantes}
+
+\subsection{Dos Variables Cualitativas}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Muestras independientes con frecuencias esperadas $E_{ij} \ge 5$:}
+    \textbf{Test Chi-cuadrado de Pearson ($\chi^2$):}
+    \begin{equation}
+    \chi^2 = \sum_{i=1}^f \sum_{j=1}^c \frac{(O_{ij} - E_{ij})^2}{E_{ij}} \sim \chi^2_{(f-1)(c-1)}
+    \end{equation}
+    con $E_{ij} = \frac{(\text{Total Fila } i)(\text{Total Columna } j)}{N}$.
+    \item \textbf{Muestras independientes con algún $E_{ij} < 5$ en tablas $2 \times 2$:}
+    \textbf{Test Exacto de Fisher:}
+    Cálculo hipergeométrico exacto sin distribución asintótica. La medida del efecto reportada es la estimación puntual de la diferencia de proporciones.
+    \item \textbf{Muestras pareadas (evaluación antes/después):}
+    \textbf{Test de McNemar:}
+    Basado en las celdas discordantes $b$ y $c$:
+    \begin{equation}
+    \chi^2 = \frac{(b - c)^2}{b + c} \sim \chi^2_1
+    \end{equation}
+    \emph{Condición de validez:} Suma de discordantes $b + c \ge 10$.
+\end{enumerate}
+
+\subsection{Una Variable Cuantitativa y una Variable Cualitativa}
+
+\subsubsection{Dos Grupos Independientes}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Condiciones paramétricas cumplidas} (Normalidad y Homocedasticidad):
+    \textbf{$t$ de Student para muestras independientes} con varianzas iguales:
+    \begin{equation}
+    t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \sim t_{n_1 + n_2 - 2}
+    \end{equation}
+    \item \textbf{Normalidad con heterocedasticidad} ($p_{\text{Levene}} < 0{,}05$):
+    \textbf{$t$ de Student corregida (Welch)} con grados de libertad aproximados por Satterthwaite.
+    \item \textbf{No normalidad y muestra pequeña ($n < 50$):}
+    \textbf{Test U de Mann-Whitney (Wilcoxon rank-sum):}
+    Prueba no paramétrica basada en rangos. Medida de efecto: Diferencia de medianas.
+\end{itemize}
+
+\subsubsection{Dos Mediciones Pareadas (Muestras Relacionadas)}
+Se calcula la serie de diferencias intraindividuales $D_i = x_{2i} - x_{1i}$.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Diferencia normal:}
+    \textbf{$t$ de Student para datos apareados:}
+    \begin{equation}
+    t = \frac{\bar{D}}{s_D / \sqrt{n}} \sim t_{n-1}
+    \end{equation}
+    \item \textbf{Diferencia no normal:}
+    \textbf{Test de los Rangos Signados de Wilcoxon:} Alternativa no paramétrica.
+\end{itemize}
+
+\subsubsection{Más de Dos Grupos Independientes ($k > 2$)}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Normalidad y homocedasticidad cumplidas:}
+    \textbf{ANOVA de un factor (F de Snedecor):}
+    \begin{equation}
+    F = \frac{MS_{\text{Entre}}}{MS_{\text{Intra}}} = \frac{SS_{\text{Entre}} / (k - 1)}{SS_{\text{Intra}} / (N - k)} \sim F_{k-1, \, N-k}
+    \end{equation}
+    En caso de significación ($p \le 0{,}05$), se procede a contrastes \emph{post-hoc} con ajuste de comparaciones múltiples (Tukey/Bonferroni).
+    \item \textbf{Incumplimiento de supuestos:}
+    \textbf{Test de Kruskal-Wallis:} Alternativa no paramétrica basada en rangos para $k$ grupos.
+\end{itemize}
+
+\subsection{Dos Variables Cuantitativas}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Distribución bivariante normal:}
+    \textbf{Coeficiente de correlación de Pearson ($r$):}
+    Estadístico de contraste bajo $H_0: \rho = 0$:
+    \begin{equation}
+    t = \frac{r \sqrt{n - 2}}{\sqrt{1 - r^2}} \sim t_{n-2}
+    \end{equation}
+    \item \textbf{Ausencia de normalidad o datos ordinales:}
+    \textbf{Coeficiente de correlación de Spearman ($r_s$):}
+    Calculado como la correlación de Pearson aplicada sobre los rangos de los datos.
+\end{itemize}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Muestreo, Validez y Control Metodológico}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diseños Muestrales}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Muestreo Aleatorio Simple (MAS):} Probabilidad idéntica e independiente de inclusión ($n/N$).
+    \item \textbf{Muestreo Sistemático:} Salto sistemático $k = N/n$ tras arranque aleatorio $r \in [1, k]$.
+    \item \textbf{Muestreo Estratificado:} División en estratos internamente homogéneos y heterogéneos entre sí. Se garantiza la representación de subgrupos clave (afijación proporcional u óptima).
+    \item \textbf{Muestreo por Conglomerados:} Selección probabilística de agrupaciones naturales internamente heterogéneas y homogéneas entre conglomerados (hospitales, municipios). Eficiente logísticamente.
+\end{itemize}
+
+\section{Validez Interna frente a Externa}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Validez Interna:} Grado en que los resultados de un ensayo o estudio observacional están exentos de sesgos sistemáticos para la cohorte analizada.
+    \item \textbf{Validez Externa (Generalizabilidad):} Grado en que los hallazgos son extrapolables a la población diana o a contextos asistenciales globales.
+    \item \emph{Principio metodológico:} La validez interna constituye un prerrequisito indispensable de la validez externa.
+\end{itemize}
+
+\section{Taxonomía Fundamental de Sesgos}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Sesgo de Selección:} Distorsión originada por diferencias sistemáticas en el proceso de reclutamiento o retención de los participantes (sesgo de Berkson, sesgo del voluntario, pérdidas diferenciales durante el seguimiento).
+    \item \textbf{Sesgo de Información / Medida:} Errores sistemáticos en el registro o clasificación de la exposición o del evento (sesgo de memoria, sesgo del observador, efecto Hawthorne).
+    \item \textbf{Sesgo de Confusión:} Asociación no causal aparente entre exposición y desenlace producida por la acción no controlada de una variable confusora. Estrategias de control:
+    \begin{itemize}
+        \item En fase de diseño: Aleatorización, restricción, emparejamiento (\emph{matching}).
+        \item En fase de análisis: Estratificación, modelos de regresión múltiple.
+    \end{itemize}
+    \item \textbf{Paradoja de Simpson:} Fenómeno epidemiológico en el cual una asociación o tendencia observada en datos agregados se invierte o desaparece al estratificar por una variable de confusión subyacente.
+\end{enumerate}
+
+\end{document}
