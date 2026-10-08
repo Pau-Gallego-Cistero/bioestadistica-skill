@@ -35,6 +35,13 @@ Cuando se activa, la IA adopta el rol de docente/especialista y aplica un protoc
 
 ---
 
+## 🌐 Idioma y Soporte Multilingüe
+
+- **Idioma por defecto:** Español (con terminología adaptada al ámbito universitario hispanohablante).
+- **Adaptación a otros idiomas:** Aunque su configuración base responde en español, la skill contempla explícitamente en sus instrucciones (*Sección 3: "Responde en español, salvo que el usuario solicite otro idioma"*) la capacidad de operar en **cualquier otro idioma** (inglés, francés, etc.). Basta con pedírselo en el prompt o formular la consulta en ese idioma para que adapte tanto el razonamiento como la notación estadística correspondiente.
+
+---
+
 ## Activadores (Triggers)
 
 La skill se activa automáticamente cuando en la conversación o prompt se detectan términos clave como:
