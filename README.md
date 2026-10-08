@@ -1,103 +1,103 @@
-# 📊 Bioestadística Skill (`SKILL.md`)
+# 📊 Biostatistics Skill (`SKILL.md`)
 
-Skill especializada en **Bioestadística y Estadística aplicada a las Ciencias de la Salud** para asistentes de Inteligencia Artificial (compatible con plataformas que soportan especificaciones de agentes y skills con `SKILL.md`).
+Skill specialized in **Biostatistics and Statistics Applied to Health Sciences** for Artificial Intelligence assistants (compatible with platforms supporting agent and skill specifications via `SKILL.md`).
 
-Diseñada para resolver problemas, contrastar hipótesis e interpretar resultados clínicos siguiendo el **formalismo académico universitario**, evitando atajos o resoluciones superficiales.
-
----
-
-## 📌 Origen y Metodología (Aviso de Transparencia)
-
-> **Nota sobre el desarrollo:**  
-> Este proyecto ha sido redactado y estructurado con **fuerte asistencia de Inteligencia Artificial**, pero **su lógica, metodología y criterios se basan íntegramente en los apuntes oficiales y temarios de 2.º curso universitario de Bioestadística** (Grados en Ciencias de la Salud: Medicina, Biología, Farmacia, Enfermería, Biotecnología).
-
-El objetivo principal fue transformar el rigor de los apuntes tradicionales (notaciones, pasos obligatorios en exámenes, justificación de hipótesis y criterios clínicos) en un conjunto de instrucciones de sistema estrictas para que la IA no invente procedimientos ni proporcione respuestas simplistas.
+Designed to solve problems, test hypotheses, and interpret clinical results following **university academic rigor**, avoiding shortcuts or superficial solutions.
 
 ---
 
-## ¿Qué hace esta Skill?
+## 📌 Origin and Methodology (Transparency Notice)
 
-Cuando se activa, la IA adopta el rol de docente/especialista y aplica un protocolo de resolución estricto:
+> **Development Note:**  
+> This project has been drafted and structured with **heavy Artificial Intelligence assistance**, but **its logic, methodology, and criteria are entirely grounded in official lecture notes and syllabi from 2nd-year university Biostatistics** (Health Sciences Degrees: Medicine, Biology, Pharmacy, Nursing, Biotechnology).
 
-1. **Prioridad absoluta a los apuntes del alumno:** Si se adjunta material o apuntes de clase, prioriza la nomenclatura y fórmulas del profesor.
-2. **Estructura académica de 7 pasos:**
-   - Datos y objetivo
-   - Elección y justificación del método
-   - Fórmula analítica
-   - Sustitución y cálculo detallado (sin saltos bruscos)
-   - Resultado con unidades y redondeo adecuado
-   - Interpretación contextualizada en salud
-   - Verificación de supuestos y limitaciones
-3. **Enfoque biomédico:**
-   - Distingue claramente entre significación estadística ($p < \alpha$) e importancia clínica.
-   - Trato riguroso de pruebas diagnósticas (Sensibilidad, Especificidad, Prevalencia, VPP y VPN vía Teorema de Bayes).
-   - Manejo adecuado de contrastes paramétricos vs. no paramétricos y verificación de normalidad/homocedasticidad.
+The main goal was to transform the rigor of traditional lecture notes (notations, mandatory exam steps, hypothesis justification, and clinical criteria) into a set of strict system instructions so that the AI does not invent procedures or provide simplistic answers.
 
 ---
 
-## 🌐 Idioma y Soporte Multilingüe
+## What Does This Skill Do?
 
-- **Idioma por defecto:** Español (con terminología adaptada al ámbito universitario hispanohablante).
-- **Adaptación a otros idiomas:** Aunque su configuración base responde en español, la skill contempla explícitamente en sus instrucciones (*Sección 3: "Responde en español, salvo que el usuario solicite otro idioma"*) la capacidad de operar en **cualquier otro idioma** (inglés, francés, etc.). Basta con pedírselo en el prompt o formular la consulta en ese idioma para que adapte tanto el razonamiento como la notación estadística correspondiente.
+When activated, the AI assumes the role of a teacher/specialist and applies a strict resolution protocol:
+
+1. **Absolute priority to student notes:** If material or class notes are attached, it prioritizes the professor's nomenclature and formulas.
+2. **7-step academic structure:**
+   - Data and objective
+   - Method selection and justification
+   - Analytical formula
+   - Substitution and detailed calculation (no sudden leaps)
+   - Result with units and proper rounding
+   - Contextualized interpretation in health
+   - Verification of assumptions and limitations
+3. **Biomedical focus:**
+   - Clearly distinguishes between statistical significance ($p < \alpha$) and clinical importance.
+   - Rigorous handling of diagnostic tests (Sensitivity, Specificity, Prevalence, PPV, and NPV via Bayes' Theorem).
+   - Proper handling of parametric vs. non-parametric tests and verification of normality/homoscedasticity.
 
 ---
 
-## Activadores (Triggers)
+## 🌐 Language and Multilingual Support
 
-La skill se activa automáticamente cuando en la conversación o prompt se detectan términos clave como:
+- **Default language:** Spanish (with terminology adapted to the Spanish-speaking university environment).
+- **Adaptation to other languages:** Although its base configuration responds in Spanish, the skill explicitly includes in its instructions (*Section 3: "Respond in Spanish, unless the user requests another language"*) the capability to operate in **any other language** (English, French, etc.). Simply asking for it in the prompt or submitting the query in that language is enough for it to adapt both the reasoning and the corresponding statistical notation.
+
+---
+
+## Triggers
+
+The skill is automatically activated when key terms are detected in the conversation or prompt, such as:
 
 - `bioestad`
 - `bioestadistica`
 - `bioestadística`
-- O peticiones explícitas para resolver o contrastar ejercicios de estadística médica, epidemiología analítica o inferencia.
+- Or explicit requests to solve or perform hypothesis tests on medical statistics exercises, analytical epidemiology, or inference.
 
 ---
 
-## 📂 Contenido del repositorio
+## 📂 Repository Contents
 
 ```text
 ├── assets/
-│   └── bibliograf.tex  # Apuntes y fuentes de referencia de bioestadística (LaTeX)
-├── SKILL.md            # Definición de la habilidad (instrucciones + frontmatter YAML)
-├── LICENSE             # Términos de la licencia de uso
-└── README.md           # Documentación del proyecto
+│   └── bibliograf.tex  # Biostatistics notes and reference sources (LaTeX)
+├── SKILL.md            # Skill definition (instructions + YAML frontmatter)
+├── LICENSE             # Terms of the license of use
+└── README.md           # Project documentation
 ```
 
 ---
 
-## ⚙️ Instalación / Uso
+## ⚙️ Installation / Usage
 
-### Opción 1: En plataformas compatibles con Agent Skills / `.skill`
-1. Descarga el archivo `SKILL.md` (o comprímelo en un archivo `.zip` si tu plataforma lo requiere).
-2. Súbelo en el panel de configuración de skills/herramientas de tu agente.
+### Option 1: On platforms compatible with Agent Skills / `.skill`
+1. Download the `SKILL.md` file (or compress it into a `.zip` archive if required by your platform).
+2. Upload it to your agent's skills/tools configuration panel.
 
-### Opción 2: Como Custom Instruction / System Prompt
-Si utilizas ChatGPT, Claude u otra interfaz web sin soporte nativo de archivos `.skill`:
-1. Abre `SKILL.md`.
-2. Omite el bloque YAML inicial (`--- ... ---`).
-3. Copia el resto del texto y pégalo en la sección de **Instrucciones personalizadas (System Prompt)** de tu asistente o proyecto.
-
----
-
-## 📖 Temas cubiertos
-
-- **Estadística descriptiva:** Medidas de centralización, dispersión, asimetría y robustez frente a *outliers*.
-- **Probabilidad y diagnóstico:** Teorema de Bayes, tasas de falsos positivos/negativos, probabilidades condicionadas.
-- **Distribuciones teóricas:** Binomial, Poisson, Normal, $t$ de Student, Chi-cuadrado, etc.
-- **Muestreo y estimación:** Estimación puntual, errores estándar y cálculo de tamaño muestral.
-- **Intervalos de confianza y contrastes de hipótesis:** Formulaciones bilaterales/unilaterales, estadísticos de prueba, región crítica y valores $p$.
-- **Asociación y modelos:** Tablas de contingencia, correlación (Pearson/Spearman) y regresión lineal.
+### Option 2: As Custom Instructions / System Prompt
+If you use ChatGPT, Claude, or another web interface without native support for `.skill` files:
+1. Open `SKILL.md`.
+2. Skip the initial YAML block (`--- ... ---`).
+3. Copy the rest of the text and paste it into the **Custom Instructions (System Prompt)** section of your assistant or project.
 
 ---
 
-## ⚠️ Descargo de responsabilidad (Disclaimer)
+## 📖 Topics Covered
 
-Esta skill está concebida como una **herramienta de apoyo al estudio universitario**. Aunque ha sido diseñada para minimizar alucinaciones y forzar la comprobación matemática:
-- Debe contrastarse siempre con los criterios específicos del profesorado de cada facultad o departamento.
-- **No debe utilizarse como herramienta de diagnóstico clínico o toma de decisiones médicas reales.**
+- **Descriptive statistics:** Measures of central tendency, dispersion, skewness, and robustness against *outliers*.
+- **Probability and diagnosis:** Bayes' Theorem, false positive/negative rates, conditional probabilities.
+- **Theoretical distributions:** Binomial, Poisson, Normal, Student's $t$, Chi-square, etc.
+- **Sampling and estimation:** Point estimation, standard errors, and sample size calculation.
+- **Confidence intervals and hypothesis testing:** Two-tailed/one-tailed formulations, test statistics, critical region, and $p$-values.
+- **Association and models:** Contingency tables, correlation (Pearson/Spearman), and linear regression.
 
 ---
 
-## Contribuciones
+## ⚠️ Disclaimer
 
-Si cursas Bioestadística y crees que falta alguna convención, prueba estadística habitual o caso especial, ¡las *pull requests* y *issues* son bienvenidas!
+This skill is intended as a **support tool for university studies**. Although it has been designed to minimize hallucinations and enforce mathematical verification:
+- It must always be checked against the specific criteria of each faculty or department's teaching staff.
+- **It must not be used as a tool for clinical diagnosis or real-world medical decision-making.**
+
+---
+
+## Contributions
+
+If you are taking Biostatistics and feel that any convention, common statistical test, or edge case is missing, pull requests and issues are welcome!
