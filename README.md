@@ -56,7 +56,9 @@ La skill se activa automáticamente cuando en la conversación o prompt se detec
 ## 📂 Contenido del repositorio
 
 ```text
+├── assets/         # Recursos adicionales e imágenes del proyecto
 ├── SKILL.md        # Definición de la habilidad (instrucciones + frontmatter YAML)
+├── LICENSE         # Términos de la licencia de uso
 └── README.md       # Documentación del proyecto
 ```
 
